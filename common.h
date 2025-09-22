@@ -32,4 +32,15 @@ int strcmp(const char *s1, const char *s2);
 void printf(const char *fmt, ...);
 
 #define PAGE_SIZE 4096
+#define PROCS_MAX 8
+#define PROC_UNUSED 0
+#define PROC_RUNNABLE 1
 
+struct process{
+	int pid;
+	int state;
+	vaddr_t sp;
+	uint8_t stack[8192];
+};
+extern void switch_context(uint32_t *prev_sp, uint32_t *next_sp);
+extern struct  process *create_process(uint32_t pc);
